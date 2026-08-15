@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Translation Tool</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- Heading -->
+
+    <h1>🌐 AI Translation Tool</h1>
+
+    <p class="subtitle">
+        CodeAlpha Internship Project
+    </p>
+
+
+    <form method="POST">
+
+
+        <!-- Text -->
+
+        <label for="text">
+            Enter your text:
+        </label>
+
+        <textarea
+            id="text"
+            name="text"
+            placeholder="Type something to translate..."
+            required>{{ original_text }}</textarea>
+
+
+        <!-- Languages -->
+
+        <div class="language-row">
+
+
+            <!-- Source -->
+
+            <div class="language-box">
+
+                <label for="source">
+                    Source Language
+                </label>
+
+                <select
+                    id="source"
+                    name="source">
+
+
+                    <option value="en"
+                        {% if selected_source == "en" %}
+                        selected
+                        {% endif %}>
+                        English
+                    </option>
+
+
+                    <option value="te"
+                        {% if selected_source == "te" %}
+                        selected
+                        {% endif %}>
+                        Telugu
+                    </option>
+
+
+                    <option value="hi"
+                        {% if selected_source == "hi" %}
+                        selected
+                        {% endif %}>
+                        Hindi
+                    </option>
+
+
+                    <option value="ta"
+                        {% if selected_source == "ta" %}
+                        selected
+                        {% endif %}>
+                        Tamil
+                    </option>
+
+
+                    <option value="kn"
+                        {% if selected_source == "kn" %}
+                        selected
+                        {% endif %}>
+                        Kannada
+                    </option>
+
+
+                    <option value="ml"
+                        {% if selected_source == "ml" %}
+                        selected
+                        {% endif %}>
+                        Malayalam
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- Target -->
+
+            <div class="language-box">
+
+                <label for="target">
+                    Target Language
+                </label>
+
+                <select
+                    id="target"
+                    name="target">
+
+
+                    <option value="en"
+                        {% if selected_target == "en" %}
+                        selected
+                        {% endif %}>
+                        English
+                    </option>
+
+
+                    <option value="te"
+                        {% if selected_target == "te" %}
+                        selected
+                        {% endif %}>
+                        Telugu
+                    </option>
+
+
+                    <option value="hi"
+                        {% if selected_target == "hi" %}
+                        selected
+                        {% endif %}>
+                        Hindi
+                    </option>
+
+
+                    <option value="ta"
+                        {% if selected_target == "ta" %}
+                        selected
+                        {% endif %}>
+                        Tamil
+                    </option>
+
+
+                    <option value="kn"
+                        {% if selected_target == "kn" %}
+                        selected
+                        {% endif %}>
+                        Kannada
+                    </option>
+
+
+                    <option value="ml"
+                        {% if selected_target == "ml" %}
+                        selected
+                        {% endif %}>
+                        Malayalam
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- Translate -->
+
+        <button type="submit">
+            🔄 Translate
+        </button>
+
+
+    </form>
+
+
+    <!-- Translation -->
+
+    {% if translation %}
+
+    <div class="translation-box">
+
+        <h2>
+            Translation:
+        </h2>
+
+
+        <div
+            id="translation"
+            class="translation-text">
+
+            {{ translation }}
+
+        </div>
+
+
+        <button
+            type="button"
+            class="copy-button"
+            onclick="copyTranslation()">
+
+            📋 Copy Translation
+
+        </button>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+
+<script>
+
+function copyTranslation() {
+
+    const translation =
+        document.getElementById("translation").innerText;
+
+    navigator.clipboard.writeText(translation)
+        .then(function () {
+
+            alert("Translation copied!");
+
+        })
+        .catch(function () {
+
+            alert("Unable to copy translation.");
+
+        });
+
+}
+
+</script>
+
+
+</body>
+
+</html>
